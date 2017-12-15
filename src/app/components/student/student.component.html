@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-condensed table-sm table-responsive-sm table-striped">
   <thead class="thead-dark">
     <tr >
       <th scope="col">#</th>
@@ -8,11 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="data in _studentsService.students.data track by $index">
+    <tr *ngFor="let col of _studentsService.students.data; let i=index">
       <th scope="row">
-         1
+         {{i + 1}}
       </th>
-      <td>{{data.value}}</td>
+      <td *ngFor="let row of col.row">
+        {{row.value}}
+      </td>
       <!--<th scope="row" *ngFor="let item of items; let i=index">
         {{i + 1}}
       </th>

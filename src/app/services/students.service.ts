@@ -19,7 +19,7 @@ export class StudentsService {
     let url = this.rootAPI + "/students";
     return this.http.get(url).map(
       (resp: any) => {
-        this.students = resp.students;
+        this.students = resp.studentListDisplay;
         return this.students;
       }
     );
