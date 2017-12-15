@@ -1,3 +1,25 @@
-<p>
-  student works!
-</p>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr >
+      <th scope="col">#</th>
+      <th scope="col" *ngFor="let col of _studentsService.students.cols">
+        {{ col.title }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in _studentsService.students.data track by $index">
+      <th scope="row">
+         1
+      </th>
+      <td>{{data.value}}</td>
+      <!--<th scope="row" *ngFor="let item of items; let i=index">
+        {{i + 1}}
+      </th>
+      <th scope="row">1</th>
+      <td *ngFor="let data of _studentsService.students.data">
+        {{ data.value }}
+      </td>-->
+    </tr>
+  </tbody>
+</table>
