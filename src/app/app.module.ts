@@ -8,6 +8,10 @@ import { APP_ROUNTING } from './app.routes';
 
 //Services
 import { StudentsService } from './services/students.service';
+import { ConfigurationService } from './services/configuration.service';
+
+//External components
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Components
 import { AppComponent } from './app.component';
@@ -16,9 +20,9 @@ import { SearchComponent } from './components/search/search.component';
 import { CourseComponent } from './components/course/course.component';
 import { StudentComponent } from './components/student/student.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
-//External components
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     StudentComponent,
     SearchComponent,
-    CourseComponent
+    CourseComponent,
+    ToolbarComponent,
+    BreadcrumbComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     APP_ROUNTING
   ],
   providers: [
-    StudentsService
+    StudentsService,
+    ConfigurationService
   ],
   bootstrap: [AppComponent]
 })

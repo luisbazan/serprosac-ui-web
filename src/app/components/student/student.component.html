@@ -1,27 +1,23 @@
-<table class="table table-condensed table-sm table-responsive-sm table-striped">
-  <thead class="thead-dark">
-    <tr >
-      <th scope="col">#</th>
-      <th scope="col" *ngFor="let col of _studentsService.students.cols">
-        {{ col.title }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let col of _studentsService.students.data; let i=index">
-      <th scope="row">
-         {{i + 1}}
-      </th>
-      <td *ngFor="let row of col.row">
-        {{row.value}}
-      </td>
-      <!--<th scope="row" *ngFor="let item of items; let i=index">
-        {{i + 1}}
-      </th>
-      <th scope="row">1</th>
-      <td *ngFor="let data of _studentsService.students.data">
-        {{ data.value }}
-      </td>-->
-    </tr>
-  </tbody>
-</table>
+<app-toolbar></app-toolbar>
+<div class="ontainer-fluid">
+  <table class="table table-condensed table-sm table-responsive-sm table-striped">
+    <thead class="thead-dark">
+      <tr >
+        <th scope="col">#</th>
+        <th scope="col" *ngFor="let col of _studentsService.students.cols">
+          {{ col.title }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let col of _studentsService.students.data; let i=index">
+        <th scope="row">
+           {{i + 1}}
+        </th>
+        <td *ngFor="let row of col.row">
+          {{row.value}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
