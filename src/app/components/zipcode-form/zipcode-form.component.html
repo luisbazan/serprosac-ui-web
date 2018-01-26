@@ -1,0 +1,12 @@
+<div [formGroup]="group" [ngClass]="{'has-error': isHasError()}">
+    <label for="typeahead-template">Locacion <span *ngIf="isRequired" class="show-required">(*)</span></label>
+    <input id="typeahead-template" type="text" autocomplete="off" class="form-control" [formControlName]="controlName" [ngbTypeahead]="search" 
+    [inputFormatter]="formatter" [resultTemplate]="rt" placeholder="Distrito Provincia Departamento"
+    [editable]="false" (selectItem)="selectItem($event)" [ngClass]="{'is-invalid': isValid}"/>
+    <div class="invalid-feedback">
+            {{errorMessage}}
+    </div>
+</div>
+<ng-template #rt let-r="result" let-t="term">
+    <div [innerHTML]="r.getSummaryDescriptionHTML() | highlight : t"></div>
+</ng-template>

@@ -1,0 +1,9 @@
+<div [formGroup]="group" [ngClass]="{'has-error': isHasError()}">    
+  <label class="form-control-label">{{label}} <span *ngIf="isRequired" class="show-required">(*)</span></label>
+  <textarea [rows]="rows" class="form-control" [ngClass]="{'is-invalid': isValid}"
+      [attr.placeholder]="label" [formControlName]="controlName" [attr.maxlength]="maxlength">
+  </textarea>
+  <div class="invalid-feedback">
+      {{errorMessage}}
+  </div>
+</div>

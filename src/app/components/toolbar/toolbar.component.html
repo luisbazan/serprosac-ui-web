@@ -1,26 +1,28 @@
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" 
-  *ngFor="let group of _configurationService.configToolbar.btngroup">
-  <div class="btn-group btn-group-sm" role="group" aria-label="group.name" 
-  *ngFor="let item of group.items">
-    
-    <button type="button" class="btn btn-secondary btn-sm">{{item.name}}</button>
-  </div>
-  
-</div>
-
-<ng-template #btnContent>
-    <div *ngIf="item.type == 'button';then btnContent else drpContent"></div>
-    <button type="button" class="btn btn-secondary btn-sm">{{item.name}}</button>
-</ng-template>
-<ng-template #drpContent>
-    <div class="dropdown">
-      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{item.defaultValue}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Toda la lista de alumnos</a>
-        <a class="dropdown-item" href="#">Alumnos por remito</a>
-        <a class="dropdown-item" href="#">Alumnos pre-inscritos</a>
-      </div>
+<form>
+    <div class="form-group">
+        <div class="btn-toolbar justify-content-between top5" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm" role="group" *ngFor="let group of _configurationService.configToolbar.btngroup"
+            [attr.aria-label]="group.name">
+            
+            <div *ngFor="let item of group.items">
+                <div *ngIf="item.type=='button'">
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="onClickToolbar(item.id)">
+                        <span class="glyphicon {{item.icon}}" aria-hidden="true"></span> {{item.name}}
+                    </button>
+                    <!-- [attr.data-target]="'#' + item.modalId" -->
+                </div>
+                <div *ngIf="item.type=='dropdown'">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{_configurationService.currentList.description}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/students']" [queryParams]="{listId:[value.code]}" *ngFor="let value of item.items" >{{value.description}}</a>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            </div>  
+        </div>
     </div>
-</ng-template>
+</form>

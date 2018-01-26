@@ -1,0 +1,78 @@
+<form id="studentFormatId" class="container" (ngSubmit)="onSave(basicForm)" [formGroup]="basicForm" novalidate>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <app-form-field-input #fieldInputDNI type="number" label="DNI" [group]="basicForm" controlName="dni" isRequired="true" [maxlength]="8">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Sexo" [group]="basicForm" controlName="sexo" isRequired="true" sourceCodeName="SEX" defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-input type="tel" label="Nro de celular" [group]="basicForm" controlName="nroCelular" isRequired="true">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-input type="tel" label="Nro de casa" [group]="basicForm" controlName="nroCasa">
+            </app-form-field-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <app-form-field-input type="text" label="Nombres" [group]="basicForm" controlName="firstName" isRequired="true">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-6">
+            <app-form-field-input type="text" label="Apellidos" [group]="basicForm" controlName="lastName" isRequired="true">
+            </app-form-field-input>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <app-form-field-input type="email" label="Email" [group]="basicForm" controlName="email" isRequired="true">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-input type="text" label="Usuario" [group]="basicForm" controlName="moodleUser">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-input type="password" label="Password" [group]="basicForm" controlName="moodlePwd">
+            </app-form-field-input>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <app-zipcode-form [group]="basicForm" controlName="location" isRequired="true"></app-zipcode-form>
+        </div>
+    </div>
+    <div class="form-group">
+        <app-form-field-input type="text" label="Direccion" [group]="basicForm" controlName="address" isRequired="true">
+        </app-form-field-input>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Estado" [group]="basicForm" controlName="state" isRequired="true" sourceCodeName="STATE" groupCode="Student"
+                defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Condicion" [group]="basicForm" controlName="status" isRequired="true" sourceCodeName="STATUS"
+                groupCode="Student" defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
+    </div>
+    <div *ngIf="showToolbar">
+        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+        <a routerLink="/studentList" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+    </div>
+</form>
+<!-- [disabled]="!basicForm.valid" -->
+<!-- {{basicForm.value | json}} -->

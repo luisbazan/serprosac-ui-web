@@ -1,0 +1,8 @@
+.has-error{
+    color: #d30808;
+    border-color: #f11212;
+}
+
+.show-required{
+    color: #d30808;
+}

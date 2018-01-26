@@ -1,51 +1,53 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Routes
 import { APP_ROUNTING } from './app.routes';
 
 //Services
-import { StudentsService } from './services/students.service';
-import { ConfigurationService } from './services/configuration.service';
 
 //External components
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
+//Modules
+import { AlertModule } from './modules/alert/alert.module';
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
+import { ServiceModule } from './services/service.module';
 
 //Components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { SearchComponent } from './components/search/search.component';
-import { CourseComponent } from './components/course/course.component';
-import { StudentComponent } from './components/student/student.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { PagesComponent } from './pages/pages.component';
+import { RegisterComponent } from './login/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    StudentComponent,
-    SearchComponent,
-    CourseComponent,
-    ToolbarComponent,
-    BreadcrumbComponent,
-    DashboardComponent
+    LoginComponent,    
+    PagesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot(),
+    AlertModule.forRoot(),
+    PagesModule,
+    SharedModule,
+    ServiceModule,
     APP_ROUNTING
   ],
   providers: [
-    StudentsService,
-    ConfigurationService
+    NgbActiveModal
   ],
   bootstrap: [AppComponent]
 })

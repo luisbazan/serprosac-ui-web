@@ -1,0 +1,41 @@
+h5 {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.modal {
+    text-align: center;
+    padding: 0!important;
+    
+  }
+  
+  .modal:show .modal-dialog {
+    transition: 0.25s all;
+    opacity: 0;
+    transform: translate(0, 5vh);
+}
+
+  .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+  }
+  
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .modal-footer .btn.pull-left {
+    float: left;
+  }
+  
+  .btn.disabled {
+    pointer-events: none;
+  }
+  .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+  }

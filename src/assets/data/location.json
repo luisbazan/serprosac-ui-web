@@ -1,0 +1,23 @@
+[
+    {
+        "zipCode":"07001",
+        "country":"Peru",
+        "state":"Callao",
+        "province":"Callao",
+        "district":"Vellavista"
+    },
+    {
+        "zipCode":"07006",
+        "country":"Peru",
+        "state":"Callao",
+        "province":"Callao",
+        "district":"San Miguel"
+    },
+    {
+        "zipCode":"07008",
+        "country":"Peru",
+        "state":"Lima",
+        "province":"Ate",
+        "district":"Vitarte"
+    }
+]

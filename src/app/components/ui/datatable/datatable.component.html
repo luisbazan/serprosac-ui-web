@@ -1,0 +1,65 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input type="text" id="demo-input-search2" name="searchString" [placeholder]="placeHolderSearch" class="form-control" [(ngModel)]="searchString">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="text-right">
+          <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-primary" (click)="addRow()">
+            <i class="fa fa-plus"></i>
+            {{btnNameToAdd}}
+          </button>
+        </div>
+
+        <h3 class="card-title">{{cardTitle}} (
+          <small> {{ data.length }} </small> )</h3>
+        <div class="table-responsive">
+          <table id="demo-foo-addrow" class="table m-t-30 contact-list table-condensed no-wrap table-striped table-hover top10" data-page-size="10">
+            <thead>
+              <tr>
+                <th data-sort-ignore="true">#</th>
+                <th *ngFor="let col of cols">
+                  {{ col.title }}
+                </th>
+                <th data-sort-ignore="true"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let value of data | filter: fields : searchString; let i=index">
+                <td>
+                  {{i + 1}}
+                </td>
+                <td *ngFor="let field of fields">
+                  <div *ngIf="field.url">
+                      <a href="javascript:void(0)" (click)="viewDetail(value)" ngbTooltip="Ver detalle">{{getValue(value, field)}}</a>
+                  </div>
+                  <div *ngIf="!field.url">
+                      {{getValue(value, field)}}
+                  </div>
+                </td>
+                <td>
+                  <button (click)="updateDetail(value)" class="btn btn-primary" ngbTooltip="Actualizar registro">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button (click)="removeDetail(value)" class="btn btn-danger" ngbTooltip="Remover registro">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

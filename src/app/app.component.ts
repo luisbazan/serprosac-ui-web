@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService, SettingsService } from './services/service.index';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private _commonService:CommonService, public _settingsService: SettingsService) {
+    this._commonService.loadLocations();
+   }
 }
