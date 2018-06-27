@@ -1,0 +1,28 @@
+<ng-template #dialogTemplate let-c="close" let-d="dismiss">
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title">{{title}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ng-content></ng-content>
+        </div>
+        <div class="modal-footer">
+            <div *ngIf="showCheckCloseModal" class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" [(ngModel)]="closeModal" (ngModelChange)="changeCloseModal()"> Cerrar ventana despues de grabar
+                </label>
+            </div>
+            <div *ngIf="showSubmit">
+                    <button type="submit" [attr.form]="formId" class="btn btn-primary waves-effect waves-light m-r-10" (click)="onSave($event)"
+                        [disabled]="isDisabled">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        </div>
+    </div>
+</ng-template>

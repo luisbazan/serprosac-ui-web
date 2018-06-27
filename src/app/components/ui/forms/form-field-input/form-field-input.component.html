@@ -1,0 +1,8 @@
+<div [formGroup]="group" [ngClass]="{'has-error': isHasError()}">    
+    <label class="form-control-label">{{label}} <span *ngIf="isRequired" class="show-required">(*)</span></label>
+    <input #fieldInput [type]="type" class="form-control" [ngClass]="{'is-invalid': isValid}"
+        [attr.placeholder]="label" [formControlName]="controlName" [attr.maxlength]="maxlength">
+    <div class="invalid-feedback">
+        {{errorMessage}}
+    </div>
+</div>

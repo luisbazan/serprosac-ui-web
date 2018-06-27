@@ -1,0 +1,28 @@
+<form>
+    <div class="form-group">
+        <div class="btn-toolbar justify-content-between top5" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm" role="group" *ngFor="let group of _configurationService.configToolbar.btngroup"
+            [attr.aria-label]="group.name">
+            
+            <div *ngFor="let item of group.items">
+                <div *ngIf="item.type=='button'">
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="onClickToolbar(item.id)">
+                        <span class="glyphicon {{item.icon}}" aria-hidden="true"></span> {{item.name}}
+                    </button>
+                    <!-- [attr.data-target]="'#' + item.modalId" -->
+                </div>
+                <div *ngIf="item.type=='dropdown'">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{_configurationService.currentList.description}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/students']" [queryParams]="{listId:[value.code]}" *ngFor="let value of item.items" >{{value.description}}</a>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            </div>  
+        </div>
+    </div>
+</form>

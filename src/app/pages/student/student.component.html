@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <!-- <app-toolbar [configId]="1" (clickToolbar)="onClickToolbar($event)"></app-toolbar>   -->
+  
+  <app-datatable placeHolderSearch="Buscar Alumnos" btnNameToAdd="Crear Alumnos" cardTitle="Alumnos Registrados" 
+  [cols]="cols" [fields]="fiels" [data]="data" groupData="Student"
+  (onClickRemoveDetail)="onRemoveDetail($event)" (onClickUpdateDetail)="onUpdateDetail($event,'student')"
+  (onClickViewDetail)="onViewDetail($event,'student')" (onClickAddRow)="onAddNewRow('student')"></app-datatable>
+
+  <app-modal-form #dialog title="Registrar Alumno" (onSaveModal) = "onSave($event)" formId="studentFormatId"
+    [isDisabled]="isbtnSaveDisabled" [closeModal]="isCloseModal" (onChangeCloseModal)="onChangeCloseModal($event)" 
+    [showCheckCloseModal]="isShowCheckCloseModal">
+      <app-student-form (onSubmit)="onSubmitForm()" (onAfterSave)="onAfterSave($event)" (onAfterLoad)="onAfterLoad()"></app-student-form>
+  </app-modal-form>
+
+  <app-confirm-modal></app-confirm-modal>
+</div>
