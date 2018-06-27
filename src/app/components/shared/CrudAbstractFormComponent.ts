@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AlertService, ICRUDService, SettingsService } from '../../services/service.index';
+import swal from 'sweetalert';
 
 export abstract class CrudAbstractFormComponent {
     @Input() showToolbar: boolean=false;
@@ -86,7 +87,7 @@ export abstract class CrudAbstractFormComponent {
     }
   
     getTitle():string {
-      return "";
+      return '';
     }
 
     onSave(forma:FormGroup) {
@@ -96,17 +97,19 @@ export abstract class CrudAbstractFormComponent {
         this.onSubmit.emit();
         this.getSpinnerService().show();      
         if (this.isNew) {
-          this.getService().add(forma.value).subscribe(resp=> {
+          this.getService().add(forma.value).subscribe((resp:any)=> {
             this.reset();
+            console.log(resp);
             this.onAfterSave.emit({ isUpdate: false , result: resp, form: forma});
-            this.showAlertSuccess(`${this.getTitle()} fue registrado correctamente`);
+            this.showAlertSuccess(`${this.getTitle()} creado`, resp.key$);            
           },error=>console.error(error));
   
         } else {
           this.getService().update(forma.value, this.id).subscribe(resp=> {
             this.getSpinnerService().hide();
             this.onAfterSave.emit({ isUpdate: true , result: resp, key$: this.id });
-            this.showAlertSuccess(`${this.getTitle()} fue actualizado correctamente`);
+            console.log(resp);
+            this.showAlertSuccess(`${this.getTitle()} actualizado`, this.id);
           },error=>console.error(error));
         }
       } else {
@@ -115,14 +118,16 @@ export abstract class CrudAbstractFormComponent {
       }
     }
   
-    showAlertSuccess(msg:string):void {
+    public showAlertSuccess(title:string, subtitle:string):void {
       this.submitted = true;
-      this.getAlert().showSuccessMessage(msg);
+      //this.getAlert().showSuccessMessage(msg);
+      swal(title, subtitle , 'success');
     }
   
-    showAlertInvalid():void {
+    public showAlertInvalid():void {
       this.submitted = false;
-      this.getAlert().showErrorMessage("El formulario es invalido, por favor corrija los datos.");
+      //this.getAlert().showErrorMessage("El formulario es invalido, por favor corrija los datos.");
+      swal(this.getTitle(), "El formulario es invalido, por favor corrija los datos." , 'error');
     }
   
     reset():void {

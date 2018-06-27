@@ -56,7 +56,7 @@ export class ModalFormComponent implements OnInit {
   }
 
   onSave(button){
-    console.log('Save Button Modal');
+    //console.log('Save Button Modal');
     this.onSaveModal.emit(button);
     //this.isDisabled = true;
   } 

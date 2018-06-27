@@ -10,6 +10,8 @@ import { DatatableComponent, dtColumn, dtField } from '../../components/ui/datat
 
 import { Student } from '../../interfaces/student';
 import { CodeType } from '../../enums/code-type.enum';
+import { IFormResponse } from '../../interfaces/iform';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-student',
@@ -20,6 +22,7 @@ export class StudentComponent extends CrudAbstractComponent implements OnInit {
   @ViewChild(StudentFormComponent) studentForm: StudentFormComponent;
   public cols:dtColumn[];
   public fiels:dtField[];
+  public searchValue = new Subject();
   
   constructor(public _studentsService: StudentsService,
     private _alert: AlertService,
@@ -46,8 +49,8 @@ export class StudentComponent extends CrudAbstractComponent implements OnInit {
     return this.studentForm;
   }
 
-  getTitle():String {
-    return "Alumno";
+  getTitle():string {
+    return 'Alumno';
   }
 
   createGrid():void {
@@ -109,7 +112,26 @@ export class StudentComponent extends CrudAbstractComponent implements OnInit {
     ]
   }
 
+  onAfterSave(event:IFormResponse) {    
+    this.isbtnSaveDisabled = false;
+    if(event.isUpdate || (this.isCloseModal && !event.isUpdate)) {
+      this.dialog.close();
+    }
+    this.getSpinnerService().hide();          
+  }
+  
+  onSearch($event) {
+    let value = $event.target.value;
+    this.searchValue.next(value);
+  }
+
   ngOnInit() {
-    this.refreshGrid();
+    this.searchValue.subscribe(text => console.log(text));
+      this._studentsService.search('122').subscribe(result=> 
+        {
+          console.log(result);
+          this.data = result;
+        }
+      );
   }
 }

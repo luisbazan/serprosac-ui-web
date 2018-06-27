@@ -1,13 +1,4 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-@NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
-})
-export class LocationModule {
+export class Location {
   
   constructor(public cod_dep_inei:string,
     public cod_dep_reniec:string,

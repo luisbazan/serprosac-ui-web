@@ -1,16 +1,14 @@
 <div class="container-fluid">
-    <app-toolbar [configId]="2" (clickToolbar)="onClickToolbar($event)"></app-toolbar>  
-    
-    <app-datatable [cols]="cols" [fields]="fiels" [data]="data" groupData="Course"
-    (onClickRemoveDetail)="onRemoveDetail($event)" (onClickUpdateDetail)="onUpdateDetail($event)"
-    (onClickViewDetail)="onViewDetail($event)"></app-datatable>
-  
-    <app-modal-form #dialog title="Registrar Curso" (onSaveModal) = "onSave($event)" formId="courseFormId"
-      [isDisabled]="isbtnSaveDisabled" [closeModal]="isCloseModal" (onChangeCloseModal)="onChangeCloseModal($event)" 
-      [showCheckCloseModal]="isShowCheckCloseModal">
+    <!-- <app-toolbar [configId]="2" (clickToolbar)="onClickToolbar($event)"></app-toolbar>  
+     -->
+    <app-datatable placeHolderSearch="Buscar Cursos" btnNameToAdd="Crear Cursos" cardTitle="Cursos Registrados" [cols]="cols"
+        [fields]="fiels" [data]="data" groupData="Course" (onClickRemoveDetail)="onRemoveDetail($event)" (onClickUpdateDetail)="onUpdateDetail($event,'course')"
+        (onClickViewDetail)="onViewDetail($event,'course')" (onClickAddRow)="onAddNewRow('course')"></app-datatable>
+
+    <app-modal-form #dialog title="Registrar Curso" (onSaveModal)="onSave($event)" formId="courseFormId" [isDisabled]="isbtnSaveDisabled"
+        [closeModal]="isCloseModal" (onChangeCloseModal)="onChangeCloseModal($event)" [showCheckCloseModal]="isShowCheckCloseModal">
         <app-course-form (onSubmit)="onSubmitForm()" (onAfterSave)="onAfterSave($event)" (onAfterLoad)="onAfterLoad()"></app-course-form>
     </app-modal-form>
-  
+
     <app-confirm-modal></app-confirm-modal>
 </div>
-  

@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from '../modules/alert/alert.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProgressComponent } from "./progress/progress.component";
@@ -16,34 +17,40 @@ import { DatatableComponent } from '../components/ui/datatable/datatable.compone
 import { ModalFormComponent } from '../components/modal-form/modal-form.component';
 import { StudentFormComponent } from './student/student-form/student-form.component';
 import { ConfirmModalComponent } from '../components/ui/confirm-modal/confirm-modal.component';
-import { FilterPipe } from '../pipe/filter.pipe';
-import { HighlightPipe } from '../pipe/highlight.pipe';
 import { FormFieldInputComponent } from '../components/ui/forms/form-field-input/form-field-input.component';
 import { FormFieldSelectComponent } from '../components/ui/forms/form-field-select/form-field-select.component';
 import { FormFieldTextareaComponent } from '../components/ui/forms/form-field-textarea/form-field-textarea.component';
 import { ZipcodeFormComponent } from '../components/zipcode-form/zipcode-form.component';
+import { CourseComponent } from './course/course.component';
+import { ProductComponent } from './product/product.component';
+import { CourseFormComponent } from './course/course-form/course-form.component';
+import { ProductFormComponent } from './product/product-form/product-form.component';
 
 @NgModule({
     declarations: [
         DashboardComponent,
         ProgressComponent,
         StudentComponent,
+        StudentFormComponent,
+        CourseComponent,
+        CourseFormComponent,
+        ProductComponent,
+        ProductFormComponent,
         ToolbarComponent,
         DatatableComponent,
         ModalFormComponent,
-        StudentFormComponent,
         ConfirmModalComponent,
         AccoutSettingComponent,
         FormFieldInputComponent,
         FormFieldSelectComponent,
         FormFieldTextareaComponent,
-        ZipcodeFormComponent,
-        FilterPipe,
-        HighlightPipe
+        ZipcodeFormComponent
     ],
     exports: [
         DashboardComponent,
         StudentComponent,
+        CourseComponent,
+        ProductComponent,
         ProgressComponent
     ],
     imports: [
@@ -53,6 +60,7 @@ import { ZipcodeFormComponent } from '../components/zipcode-form/zipcode-form.co
         ReactiveFormsModule,
         NgbModule.forRoot(),
         AlertModule.forRoot(),
+        PipesModule,
         PAGE_ROUTES
     ]
 })

@@ -6,14 +6,18 @@ import {
   SidebarService,
   SharedService,
   StudentsService,
+  CourseService,
+  ProductService,
   ConfigurationService,
   CommonService
 } from './service.index';
 import { AlertService } from './shared/alert.service';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    StoreModule
   ],
   providers:[
     SettingsService,
@@ -21,6 +25,8 @@ import { AlertService } from './shared/alert.service';
     CommonService,
     ConfigurationService,
     StudentsService,
+    CourseService,
+    ProductService,
     SharedService
   ],
   declarations: []

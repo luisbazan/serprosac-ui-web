@@ -8,5 +8,5 @@
     </div>
 </div>
 <ng-template #rt let-r="result" let-t="term">
-    <div [innerHTML]="r.getSummaryDescriptionHTML() | highlight : t"></div>
+    <div [innerHTML]="r.summaryDescription | highlight : t"></div>
 </ng-template>

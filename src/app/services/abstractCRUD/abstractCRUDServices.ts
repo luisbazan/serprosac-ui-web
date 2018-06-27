@@ -5,6 +5,7 @@ import { Audit } from '../../interfaces/audit';
 import 'rxjs/add/operator/map';
 
 export abstract class AbstractCRUDServices implements ICRUDService {
+  
   public rootFireBase:string = "https://demofirebase-97980.firebaseio.com/";
   userLogin: string = 'lbazan';
 
@@ -93,6 +94,10 @@ export abstract class AbstractCRUDServices implements ICRUDService {
     );
   }
 
+  search(termino: string): Observable<any[]> {
+    throw new Error("Method not implemented.");
+  }
+  
   private setAudit(data:any){
 
     if(data.audit!=null) {
@@ -133,4 +138,5 @@ export interface ICRUDService {
   update(object:any, key$:string):Observable<Object>;
   retrieve(key$:string):Observable<Object>;
   retrieveAll():Observable<any[]>;
+  search(termino:string):Observable<any[]>;
 }

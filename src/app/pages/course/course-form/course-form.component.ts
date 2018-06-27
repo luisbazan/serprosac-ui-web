@@ -4,8 +4,9 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Pattern } from '../../../common/pattern';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { CrudAbstractFormComponent } from '../../../components/shared/CrudAbstractFormComponent';
-import { CourseService, AlertService, ICRUDService } from '../../../services/service.index';
+import { CourseService, AlertService, ICRUDService, SettingsService } from '../../../services/service.index';
 import { Course } from '../../../interfaces/course';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-form',
@@ -18,13 +19,16 @@ export class CourseFormComponent extends CrudAbstractFormComponent{
     private _CourseService: CourseService,
     private spinnerService: Ng4LoadingSpinnerService,
     private _fb: FormBuilder,
-    private _alert: AlertService) {
-      super();
+    private _alert: AlertService,
+    public _settings: SettingsService, 
+    public _router:Router,
+    public _activatedRoute: ActivatedRoute) {
+      super(_settings, _router, _activatedRoute);
       this.basicForm = this.createFormGroup();
   }
 
   getTitle():string {
-    return "El curso";
+    return 'Curso';
   }
 
   createFormGroup(): (FormGroup){

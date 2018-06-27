@@ -109,3 +109,12 @@ a.link:hover, a.link:focus {
 
 .sidebar-nav > ul > li > a i {
   color: #a6b7bf; }
+
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+      background-color: #56c0d8 ;
+      border-color: #56c0d8;
+  }

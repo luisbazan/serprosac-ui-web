@@ -22,6 +22,7 @@ export class DatatableComponent {
   @Output() onClickRemoveDetail = new EventEmitter();
   @Output() onClickUpdateDetail = new EventEmitter();
   @Output() onClickViewDetail = new EventEmitter();
+  @Output() onSearch = new EventEmitter();
 
   constructor(public _commonService: CommonService) { }
 
@@ -60,6 +61,10 @@ export class DatatableComponent {
 
   addRow() {
     this.onClickAddRow.emit();
+  }
+
+  search(value) {
+    this.onSearch.emit(value);
   }
 }
 

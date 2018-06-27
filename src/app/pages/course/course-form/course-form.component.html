@@ -1,52 +1,59 @@
 <form id="courseFormId" class="container" (ngSubmit)="onSave(basicForm)" [formGroup]="basicForm" novalidate>
-  <div class="form-row">
-    <div class="form-group col-md-6" >
-       <app-form-field-input type="text" label="Codigo" [group]="basicForm" controlName="code" isRequired="true" [maxlength]="10">
-       </app-form-field-input>    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <app-form-field-input type="text" label="Codigo" [group]="basicForm" controlName="code" isRequired="true" [maxlength]="10">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-6">
+            <app-form-field-input type="text" label="Titulo" [group]="basicForm" controlName="title" isRequired="true">
+            </app-form-field-input>
+        </div>
     </div>
-    <div class="form-group col-md-6">
-        <app-form-field-input type="text" label="Titulo" [group]="basicForm" controlName="title" isRequired="true">
+    <div class="form-group">
+        <app-form-field-input type="text" label="Descripcion Breve" [group]="basicForm" controlName="shortDescription" isRequired="true">
         </app-form-field-input>
     </div>
-  </div>
-  <div class="form-group">
-    <app-form-field-input type="text" label="Descripcion Breve" [group]="basicForm" controlName="shortDescription" isRequired="true">
-    </app-form-field-input>
-  </div>
-  <div class="form-group">
-    <app-form-field-textarea label="Descripcion" [group]="basicForm" controlName="description">
-    </app-form-field-textarea>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-        <app-form-field-input type="number" label="Precio de Lista" [group]="basicForm" controlName="listPrice" isRequired="true">
-        </app-form-field-input>
+    <div class="form-group">
+        <app-form-field-textarea label="Descripcion" [group]="basicForm" controlName="description">
+        </app-form-field-textarea>
     </div>
-    <div class="form-group col-md-3">
-        <app-form-field-input type="number" label="Precio Actual" [group]="basicForm" controlName="currentPrice" isRequired="true">
-        </app-form-field-input>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <app-form-field-input type="number" label="Precio de Lista" [group]="basicForm" controlName="listPrice" isRequired="true">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-input type="number" label="Precio Actual" [group]="basicForm" controlName="currentPrice" isRequired="true">
+            </app-form-field-input>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Tipo" [group]="basicForm" controlName="type" isRequired="true" sourceCodeName="TYPE" groupCode="Course"
+                defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Categoria" [group]="basicForm" controlName="category" isRequired="true" sourceCodeName="CATEGORY"
+                groupCode="Course" defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
     </div>
-    <div class="form-group col-md-3">
-        <app-form-field-select label="Tipo" [group]="basicForm" controlName="type" isRequired="true" sourceCodeName="TYPE" groupCode="Course" defaultValue="Seleccione...">
-        </app-form-field-select>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Estado" [group]="basicForm" controlName="state" isRequired="true" sourceCodeName="STATE" groupCode="Course"
+                defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
+        <div class="form-group col-md-3">
+            <app-form-field-select label="Estatus" [group]="basicForm" controlName="status" isRequired="true" sourceCodeName="STATUS"
+                groupCode="Course" defaultValue="Seleccione...">
+            </app-form-field-select>
+        </div>
     </div>
-    <div class="form-group col-md-3">
-        <app-form-field-select label="Categoria" [group]="basicForm" controlName="category" isRequired="true" sourceCodeName="CATEGORY" groupCode="Course" defaultValue="Seleccione...">
-        </app-form-field-select>
+    <div *ngIf="showToolbar">
+        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+        <a routerLink="/studentList" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
     </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-        <app-form-field-select label="Estado" [group]="basicForm" controlName="state" isRequired="true" sourceCodeName="STATE" groupCode="Course" defaultValue="Seleccione...">
-        </app-form-field-select>
-    </div>
-    <div class="form-group col-md-3">
-        <app-form-field-select label="Estatus" [group]="basicForm" controlName="status" isRequired="true" sourceCodeName="STATUS" groupCode="Course" defaultValue="Seleccione...">
-        </app-form-field-select>
-    </div>
-  </div>
-  <div *ngIf="showToolbar">
-      <button class="btn btn-primary" type="submit" >Guardar</button>
-  </div> 
-  
 </form>

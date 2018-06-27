@@ -45,7 +45,7 @@ export class StudentFormComponent extends CrudAbstractFormComponent {
   }
 
   getTitle():string {
-    return "El alumno";
+    return 'Alumno';
   }
 
   createFormGroup(): (FormGroup){

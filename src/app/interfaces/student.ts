@@ -1,4 +1,4 @@
-import { LocationModule } from '../models/location/location.module';
+import { Location } from '../models/location';
 import { Audit } from '../interfaces/audit';
 import { SexoEnum, StatusStudentEnum, StateStudentEnum } from '../enums/person.enum';
 
@@ -13,7 +13,7 @@ export interface Student {
     moodleUser: string;
     moodlePwd: string;
     address: string;
-    location: LocationModule;
+    location: any;//Location;
     status: StatusStudentEnum;
     state: StateStudentEnum;
     audit?: Audit;

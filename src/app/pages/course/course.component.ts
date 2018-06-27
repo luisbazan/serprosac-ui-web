@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { CourseService, AlertService, AbstractCRUDServices } from '../../services/service.index';
+import { CourseService, AlertService, AbstractCRUDServices, SettingsService } from '../../services/service.index';
 
 import { CourseFormComponent } from '../course/course-form/course-form.component';
 import { CrudAbstractComponent } from '../../components/shared/CrudAbstractComponent';
@@ -9,6 +9,9 @@ import { DatatableComponent, dtColumn, dtField } from '../../components/ui/datat
 
 import { Course } from '../../interfaces/course';
 import { CodeType } from '../../enums/code-type.enum';
+import { Router } from '@angular/router';
+import { IFormResponse } from '../../interfaces/iform';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-course',
@@ -19,11 +22,12 @@ export class CourseComponent extends CrudAbstractComponent implements OnInit {
   @ViewChild(CourseFormComponent) courseForm: CourseFormComponent;
   public cols:dtColumn[];
   public fiels:dtField[];
-  
+  public searchValue = new Subject();
   constructor(public _courseService: CourseService,
     private _alert: AlertService,
-    public spinnerService: Ng4LoadingSpinnerService) {
-      super();
+    public spinnerService: Ng4LoadingSpinnerService,
+    public _settings: SettingsService, public _router:Router) {
+      super(_settings, _router);
       this.createGrid();
   }
 
@@ -43,8 +47,8 @@ export class CourseComponent extends CrudAbstractComponent implements OnInit {
     return this.courseForm;
   }
 
-  getTitle():String {
-    return "Curso";
+  getTitle():string {
+    return 'Curso';
   }
 
   createGrid():void {
@@ -113,7 +117,27 @@ export class CourseComponent extends CrudAbstractComponent implements OnInit {
     ]
   }
 
+  onAfterSave(event:IFormResponse) {    
+    this.isbtnSaveDisabled = false;
+    if(event.isUpdate || (this.isCloseModal && !event.isUpdate)) {
+      this.dialog.close();
+    }
+    this.getSpinnerService().hide();          
+  }
+  
+  onSearch($event) {
+    let value = $event.target.value;
+    this.searchValue.next(value);
+  }
+
   ngOnInit() {
-    this.refreshGrid();
+    //this.refreshGrid();
+    this.searchValue.subscribe(text => console.log(text));
+      this._courseService.search('122').subscribe(result=> 
+        {
+          console.log(result);
+          this.data = result;
+        }
+      );
   }
 }

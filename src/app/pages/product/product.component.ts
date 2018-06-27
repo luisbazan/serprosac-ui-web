@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { ProductService, AbstractCRUDServices, AlertService } from '../../services/service.index';
+import { ProductService, AbstractCRUDServices, AlertService, SettingsService, ICRUDService } from '../../services/service.index';
 
 import { ProductFormComponent } from '../product/product-form/product-form.component';
 import { CrudAbstractComponent } from '../../components/shared/CrudAbstractComponent';
@@ -9,6 +9,9 @@ import { DatatableComponent, dtColumn, dtField } from '../../components/ui/datat
 
 import { Product } from '../../interfaces/product';
 import { CodeType } from '../../enums/code-type.enum';
+import { Router } from '@angular/router';
+import { IFormResponse } from '../../interfaces/iform';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-product',
@@ -19,15 +22,17 @@ export class ProductComponent extends CrudAbstractComponent implements OnInit {
   @ViewChild(ProductFormComponent) productForm: ProductFormComponent;
   public cols:dtColumn[];
   public fiels:dtField[];
-  
+  public searchValue = new Subject();
   constructor(public _ProductService: ProductService,
     private _alert: AlertService,
-    public spinnerService: Ng4LoadingSpinnerService) {
-      super();
+    public spinnerService: Ng4LoadingSpinnerService,
+    public _settings: SettingsService, public _router:Router) {
+      super(_settings, _router);
       this.createGrid();
+      
   }
 
-  getCrudService():AbstractCRUDServices {
+  getCrudService():ICRUDService {
     return this._ProductService;
   }
 
@@ -43,8 +48,8 @@ export class ProductComponent extends CrudAbstractComponent implements OnInit {
     return this.productForm;
   }
 
-  getTitle():String {
-    return "Producto";
+  getTitle():string {
+    return 'Producto';
   }
 
   createGrid():void {
@@ -93,7 +98,27 @@ export class ProductComponent extends CrudAbstractComponent implements OnInit {
     ]
   }
 
+  onAfterSave(event:IFormResponse) {    
+    this.isbtnSaveDisabled = false;
+    if(event.isUpdate || (this.isCloseModal && !event.isUpdate)) {
+      this.dialog.close();
+    }
+    this.getSpinnerService().hide();          
+  }
+  
+  onSearch($event) {
+    let value = $event.target.value;
+    this.searchValue.next(value);
+  }
+
   ngOnInit() {
-    this.refreshGrid();
+    //this.refreshGrid();
+    this.searchValue.subscribe(text => console.log(text));
+      this._ProductService.search('122').subscribe(result=> 
+        {
+          console.log(result);
+          this.data = result;
+        }
+      );
   }
 }

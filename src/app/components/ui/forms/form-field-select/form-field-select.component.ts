@@ -4,7 +4,7 @@ import { AbstractField } from '../abstractField';
 
 import { CodeType } from '../../../../enums/code-type.enum';
 import { CommonService } from '../../../../services/service.index';
-import { CodeModule } from '../../../../models/code/code.module';
+import { Code } from '../../../../models/code';
 
 @Component({
   selector: 'app-form-field-select',
@@ -18,7 +18,7 @@ export class FormFieldSelectComponent extends AbstractField implements OnInit {
   @Input() defaultValue:string;
   @Input() groupCode:string;
     
-  public listCodes:CodeModule[] = [];
+  public listCodes:Code[] = [];
 
   constructor(public _commonService: CommonService) {
       super();
@@ -28,7 +28,7 @@ export class FormFieldSelectComponent extends AbstractField implements OnInit {
     if(this.sourceCodeName) {  
       this.listCodes = this._commonService.retrieveCodesByType(this.groupCode, CodeType[this.sourceCodeName]);
       if(this.defaultValue) {
-        this.listCodes.unshift(new CodeModule("","", this.defaultValue));
+        this.listCodes.unshift(new Code("","", this.defaultValue));
       }
     }
   }

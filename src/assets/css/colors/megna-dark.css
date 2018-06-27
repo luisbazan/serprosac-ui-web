@@ -146,6 +146,17 @@ a.link:hover, a.link:focus {
 .sidebar-nav ul li.nav-small-cap {
   color: #687384; }
 
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+      background-color: #56c0d8 ;
+      border-color: #56c0d8;
+  }
+
 @media (min-width: 768px) {
   .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
     background: #1c2128; } }
+
+

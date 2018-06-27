@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class SettingsService {
@@ -11,7 +12,9 @@ export class SettingsService {
     isOpenModalMain: true
   };
 
-  constructor(@Inject(DOCUMENT) private _document) { 
+  constructor(@Inject(DOCUMENT) private _document,
+  private db: AngularFirestore) { 
+    this.db.collection<any>('courses').valueChanges().subscribe(r=>console.log(r))
     this.loadSettings();
   }
 

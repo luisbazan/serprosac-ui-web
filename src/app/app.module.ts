@@ -41,10 +41,10 @@ import { RegisterComponent } from './login/register.component';
     NgbModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
     AlertModule.forRoot(),
-    PagesModule,
     SharedModule,
     ServiceModule,
-    APP_ROUNTING
+    PagesModule,
+    APP_ROUNTING    
   ],
   providers: [
     NgbActiveModal

@@ -16,10 +16,20 @@ export class SidebarService {
       submenu: [{
         title:'Lista',
         url: '/studentList'
-      },
-      {
-        title:'Crear',
-        url: '/studentAdd'
+      }]
+    },{
+      title: 'Cursos',
+      icon: 'mdi mdi-book-open-page-variant',
+      submenu: [{
+        title:'Lista',
+        url: '/courseList'
+      }]
+    },{
+      title: 'Productos',
+      icon: 'mdi mdi-factory',
+      submenu: [{
+        title:'Lista',
+        url: '/productList'
       }]
     }
 ];

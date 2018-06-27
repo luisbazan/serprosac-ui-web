@@ -19,7 +19,7 @@ export class ConfigurationService {
     let url = this.rootAPI + "/configurations/" + id;
     return this.http.get(url).map(
       (resp: any) => {
-        console.log(resp);
+        //console.log(resp);
         this.configToolbar = resp.toolbar;
         return this.configToolbar;
       }

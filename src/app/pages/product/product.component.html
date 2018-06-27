@@ -1,10 +1,11 @@
 <div class="container-fluid">
-  <app-toolbar [configId]="2" (clickToolbar)="onClickToolbar($event)"></app-toolbar>  
+  <!-- <app-toolbar [configId]="2" (clickToolbar)="onClickToolbar($event)"></app-toolbar>   -->
   
-  <app-datatable [cols]="cols" [fields]="fiels" [data]="data" groupData="Product"
-  (onClickRemoveDetail)="onRemoveDetail($event)" (onClickUpdateDetail)="onUpdateDetail($event)"
-  (onClickViewDetail)="onViewDetail($event)"></app-datatable>
-
+  <app-datatable placeHolderSearch="Buscar Productos" btnNameToAdd="Crear Productos" cardTitle="Productos Registrados" [cols]="cols"
+        [fields]="fiels" [data]="data" groupData="Product" (onClickRemoveDetail)="onRemoveDetail($event)" (onClickUpdateDetail)="onUpdateDetail($event,'product')"
+        (onClickViewDetail)="onViewDetail($event,'product')" (onClickAddRow)="onAddNewRow('product')"
+        (onSearch)="onSearch($event)"></app-datatable>
+        
   <app-modal-form #dialog title="Registrar Producto" (onSaveModal) = "onSave($event)" formId="productFormId"
     [isDisabled]="isbtnSaveDisabled" [closeModal]="isCloseModal" (onChangeCloseModal)="onChangeCloseModal($event)" 
     [showCheckCloseModal]="isShowCheckCloseModal">

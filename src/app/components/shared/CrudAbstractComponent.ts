@@ -1,13 +1,15 @@
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AbstractCRUDServices, AlertService } from '../../services/service.index';
+import { AbstractCRUDServices, AlertService, ICRUDService } from '../../services/service.index';
 import { IFormResponse } from '../../interfaces/iform';
 import { Toolbar } from '../../enums/module.enum';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { ConfirmModalComponent } from '../ui/confirm-modal/confirm-modal.component';
 import { CrudAbstractFormComponent } from '../../components/shared/CrudAbstractFormComponent';
 import { SettingsService } from '../../services/service.index';
+
+import swal from 'sweetalert';
 
 export abstract class CrudAbstractComponent {
   @ViewChild(ModalFormComponent) dialog: ModalFormComponent;
@@ -28,7 +30,7 @@ export abstract class CrudAbstractComponent {
     
   }
 
-  getCrudService():AbstractCRUDServices {
+  getCrudService():ICRUDService {
     return null;
   }
 
@@ -44,16 +46,13 @@ export abstract class CrudAbstractComponent {
     return null;
   }
 
-  getTitle():String {
-    return null;
-  }
-
   isOpenModal():boolean {
     return this._settings.setting.isOpenModalMain;
   }
 
   refreshGrid():void {    
     this.getCrudService().retrieveAll().subscribe((resp:any[])=>{ 
+      //console.log(resp);
       this.data = resp;
       this.getSpinnerService().hide();
     });
@@ -89,8 +88,12 @@ export abstract class CrudAbstractComponent {
     this.isbtnSaveDisabled = true;
   }
 
+  getTitle():string {
+    return '';
+  }
+
   onRemoveDetail(value:any) {
-    this.confirmDialog.show("Confirmar solicitud", "Esta seguro de eliminar el registro?")
+    this.confirmDialog.show('Confirmar solicitud', 'Esta seguro de eliminar el registro?')
     .then(res=>
       this.confirmRemoveDetail(res, value)
     );
@@ -107,19 +110,29 @@ export abstract class CrudAbstractComponent {
         this.dataRemoved.push(value);
         this.data = this.data.filter(item => !this.dataRemoved.includes(item));
         this.getSpinnerService().hide();
-        this.getAlertService().showSuccessMessage("El registro fue eliminado");
+        console.log(resp);
+        this.showAlertSuccess(`${this.getTitle()} eliminado`, resp);
       })
     }
+  }
+
+  public showAlertSuccess(title:string, subtitle:string):void {
+    swal(title, subtitle , 'success');
+  }
+
+  public showAlertInvalid():void {
+    swal(this.getTitle(), 'El formulario es invalido, por favor corrija los datos.', 'error');
   }
 
   onUpdateDetail(value:any,link:string) {
     this.isbtnSaveDisabled = true;    
     if(this.isOpenModal()) {
-      this.dialog.title = "Actualizar " + this.getTitle();
+      this.dialog.title = 'Actualizar ' + this.getTitle();
       this.dialog.showSubmit = true;      
       this.getCrudForm().displayFormToUpdate(value.key$);
       this.dialog.show({
-        size:'lg'
+        size:'lg',
+        backdrop: 'static'
       });
     } else {
       this.getCrudForm().displayFormToUpdate(value.key$);
@@ -129,12 +142,13 @@ export abstract class CrudAbstractComponent {
 
   onViewDetail(value:any,link:string) {
     if(this.isOpenModal()) {
-      this.dialog.title = "Vista " + this.getTitle();
+      this.dialog.title = 'Vista ' + this.getTitle();
       this.dialog.showSubmit = false;
       this.isbtnSaveDisabled = true;
       this.getCrudForm().displayFormToRead(value.key$);
       this.dialog.show({
-        size:'lg'
+        size:'lg',
+        backdrop: 'static'
       });
     } else {
       this.getCrudForm().displayFormToRead(value.key$);
@@ -144,14 +158,15 @@ export abstract class CrudAbstractComponent {
   }
 
   onAddNewRow(link:string) {
-    console.log(this.isOpenModal());
+    //console.log(this.isOpenModal());
     if(this.isOpenModal()) {
-      this.dialog.title = "Registrar " + this.getTitle();
+      this.dialog.title = 'Registrar ' + this.getTitle();
       this.dialog.showSubmit = true;
       this.isbtnSaveDisabled = false;
       this.getCrudForm().displayFormToCreate();
       this.dialog.show({
-        size:'lg'
+        size:'lg',
+        backdrop: 'static'
       });
     } else {
       this.getCrudForm().displayFormToCreate();
